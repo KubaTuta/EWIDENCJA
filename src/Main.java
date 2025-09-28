@@ -9,7 +9,7 @@ public class Main {
 
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
 
-    public static void main(String[] args) {
+     static void main(String[] args) {
 
         try {
             System.out.println("zawartość pliku");
