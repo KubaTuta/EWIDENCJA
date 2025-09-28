@@ -9,7 +9,13 @@ public class Main {
 
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
 
-     static void main(String[] args) {
+    private static String removeLineBreaks(String text) {
+        if (text == null) return "";
+        return text.replace("\n", " ").replace("\r", " ").trim();
+    }
+
+    static void main(String[] args) {
+
 
         try {
             System.out.println("zawartość pliku");
@@ -17,6 +23,9 @@ public class Main {
             List<String> strings = Files.readAllLines(path, StandardCharsets.UTF_8);
             for (String fileText : strings) {
                 String[] parts = fileText.split(";");
+                for (int i = 0; i < parts.length; i++) {
+                    parts[i] = removeLineBreaks(parts[i]);
+                }
                 for (String part : parts) {
                     System.out.print(part + "; ");
                 }
