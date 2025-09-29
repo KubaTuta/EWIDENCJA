@@ -9,9 +9,11 @@ public class Main {
 
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
 
-    private static String removeLineBreaks(String text) {
-        if (text == null) return "";
-        return text.replace("\n", " ").replace("\r", " ").trim();
+    private static void loopRemovingLineBreaks(String[] parts) {
+        for (int i = 0; i < parts.length; i++) {
+            parts[i] =
+                    (parts[i] == null) ? "" : parts[i].replace("\n", " ").replace("\r", " ").trim();
+        }
     }
 
     static void main(String[] args) {
@@ -23,12 +25,13 @@ public class Main {
             List<String> strings = Files.readAllLines(path, StandardCharsets.UTF_8);
             for (String fileText : strings) {
                 String[] parts = fileText.split(";");
-                for (int i = 0; i < parts.length; i++) {
-                    parts[i] = removeLineBreaks(parts[i]);
-                }
+
+                loopRemovingLineBreaks(parts);
+
                 for (String part : parts) {
                     System.out.print(part + "; ");
                 }
+
                 System.out.println(" ");
                 System.out.println("-------------------------------------------------------------");
             }
