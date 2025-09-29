@@ -9,10 +9,10 @@ public class Main {
 
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
 
-    private static void loopRemovingLineBreaks(String[] parts) {
-        for (int i = 0; i < parts.length; i++) {
-            parts[i] =
-                    (parts[i] == null) ? "" : parts[i].replace("\n", " ").replace("\r", " ").trim();
+    private static void loopRemovingLineBreaks(String[] carAttributes) {
+        for (int i = 0; i < carAttributes.length; i++) {
+            carAttributes[i] =
+                    (carAttributes[i] == null) ? "" : carAttributes[i].replace("\n", " ").replace("\r", " ").trim();
         }
     }
 
@@ -22,14 +22,14 @@ public class Main {
         try {
             System.out.println("zawartość pliku");
             Path path = Paths.get(FILE_PATH);
-            List<String> strings = Files.readAllLines(path, StandardCharsets.UTF_8);
-            for (String fileText : strings) {
-                String[] parts = fileText.split(";");
+            List<String> rows = Files.readAllLines(path, StandardCharsets.UTF_8);
+            for (String row : rows) {
+                String[] carAttributes = row.split(";");
 
-                loopRemovingLineBreaks(parts);
+                loopRemovingLineBreaks(carAttributes);
 
-                for (String part : parts) {
-                    System.out.print(part + "; ");
+                for (String singleCarAttribute : carAttributes) {
+                    System.out.print(singleCarAttribute + "; ");
                 }
 
                 System.out.println(" ");
