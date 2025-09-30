@@ -18,7 +18,7 @@ public class CsvReader {
         List<String> rows = Files.readAllLines(path, StandardCharsets.UTF_8);
         List<String[]> newRows = new ArrayList<>();
         for (String row : rows) {
-            String[] carAttributes = row.split(";");
+            String[] carAttributes = row.split(";", -1);
 
             loopRemovingLineBreaks(carAttributes);
 
