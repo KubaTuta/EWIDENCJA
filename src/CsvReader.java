@@ -10,7 +10,7 @@ public class CsvReader {
     private static void loopRemovingLineBreaks(String[] carAttributes) {
         for (int i = 0; i < carAttributes.length; i++) {
             carAttributes[i] =
-                    (carAttributes[i] == null) ? "" : carAttributes[i].replace("\n", " ").replace("\r", " ").trim();
+            (carAttributes[i] == null) ? "" : carAttributes[i].replaceAll("//R+", " ").trim();
         }
     }
 
