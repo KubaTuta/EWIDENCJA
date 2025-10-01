@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -10,18 +11,19 @@ public class Main {
     static void main(String[] args) {
 
         try {
-            System.out.println("zawartość pliku");
             Path path = Paths.get(FILE_PATH);
             List<String[]> rows = CsvReader.readCsvFile(path);
+            List<Car> cars = new ArrayList<>();
+
             for (String[] row : rows) {
-
-                for (String singleCarAttribute : row) {
-                    System.out.print(singleCarAttribute + "; ");
-                }
-
-                System.out.println(" ");
-                System.out.println("-------------------------------------------------------------");
+                Car car = new Car(row);
+                cars.add(car);
             }
+
+            for (Car car : cars) {
+                System.out.println(car.allAttributeNames());
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
