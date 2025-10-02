@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,10 +21,7 @@ public class Main {
                 Car car = new Car(row);
                 cars.add(car);
             }
-
-            for (Car car : cars) {
-                System.out.println(car.allAttributeNames());
-            }
+            CarMethods.showDailyInvoiceNumbers(cars, "2.10.2025");
 
         } catch (IOException e) {
             throw new RuntimeException(e);
