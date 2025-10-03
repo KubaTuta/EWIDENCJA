@@ -10,8 +10,7 @@ public class Main {
 
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
 
-    static void main(String[] args) {
-
+    public static void main(String[] args) {
         try {
             Path path = Paths.get(FILE_PATH);
             List<String[]> rows = CsvReader.readCsvFile(path);
@@ -22,6 +21,7 @@ public class Main {
                 cars.add(car);
             }
             CarMethods.showDailyInvoiceNumbers(cars, "2.10.2025");
+            CarMethods.showDailyComments(cars, "30.09.2025");
 
         } catch (IOException e) {
             throw new RuntimeException(e);
