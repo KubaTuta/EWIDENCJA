@@ -6,14 +6,10 @@ import java.util.List;
 
 public class App {
 
-    private final String filePath;
-
-    public App(String filePath) {
-        this.filePath = filePath;
-    }
+    private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
 
     public void run() throws IOException {
-        Path path = Paths.get(filePath);
+        Path path = Paths.get(FILE_PATH);
         List<String[]> rows = CsvReader.readCsvFile(path);
         List<Car> cars = new ArrayList<>();
 
