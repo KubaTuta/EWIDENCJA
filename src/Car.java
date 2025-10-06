@@ -1,7 +1,8 @@
 import java.util.List;
 
 public class Car {
-
+    private static int counter = 0;
+    public final int index;
     public final String regNumber;
     public final String vin;
     public final String status;
@@ -32,6 +33,7 @@ public class Car {
     public final String expirationDate;
 
     public Car(String[] carAttributes) {
+        this.index = counter++;
         this.regNumber = carAttributes[0];
         this.vin = carAttributes[1];
         this.status = carAttributes[2];
@@ -60,6 +62,8 @@ public class Car {
         this.dateOfInvoiceIssue = carAttributes[37];
         this.insurer = carAttributes[39];
         this.expirationDate = carAttributes[40];
+
+
     }
 
     public String allAttributeNames() {
