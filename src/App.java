@@ -26,6 +26,7 @@ public class App extends Application {
         var inputField = new TextField();
         var confirmationButton = new Button("OK");
         var feedbackLabel = new Label();
+
         var topButtons = new HBox(10, dailyInvoicesButton, commentsButton, findCarInfoButton);
         var layout = new VBox(10, topButtons, promptLabel, inputField, confirmationButton, feedbackLabel);
 
@@ -46,29 +47,39 @@ public class App extends Application {
 
         dailyInvoicesButton.setOnAction(e -> {
             promptLabel.setText(" Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)");
+            promptNumber = 1;
+            inputField.clear();
         });
 
         commentsButton.setOnAction(e -> {
             promptLabel.setText(" Wpisz datę, aby wyświetlić komentarze do aut z tego dnia (dd.mm.rrrr)");
+            promptNumber = 2;
+            inputField.clear();
         });
 
         findCarInfoButton.setOnAction(e -> {
             promptLabel.setText("Wpisz nr rej. aby wyświetlić dane auta");
+            promptNumber = 3;
+            inputField.clear();
         });
-
 
         confirmationButton.setOnAction(e -> {
             String inputString = inputField.getText();
-            int typeOfAction = Integer.parseInt(inputString);
-            if (typeOfAction == 1) {
-                feedbackLabel.setText(CarMethods.showDailyInvoiceNumbers(cars, "30.09.2025"));
-                promptLabel.setText(" podaj datę");
-            } else if (typeOfAction == 2) {
-                promptLabel.setText(" podaj datę");
-            } else if (typeOfAction == 3) {
-                promptLabel.setText("podaj nr tablicy lub VIN");
+            switch (promptNumber) {
+                case 1:
+
+                    feedbackLabel.setText(CarMethods.showDailyInvoiceNumbers(cars, inputString));
+                    break;
+                case 2:
+                    feedbackLabel.setText("2");
+                    break;
+                case 3:
+                    feedbackLabel.setText("3");
+                    break;
+
+
             }
-            inputField.clear();
+
         });
 //
 //        System.out.println("Co chcesz zrobić?");
