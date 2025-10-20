@@ -3,6 +3,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -18,12 +19,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        var promptLabel = new Label(" Co chcesz zrobić? \n [1] Wyświetl numery faktur z danego dnia \n " +
-                "[2] Wyświetl komentarze do aut z danego dnia \n [3] Znajdź auto po tablicy lub VINie");
+        var dailyInvoicesButton = new Button("Faktury danego dnia");
+        var commentsButton = new Button("Komentarze");
+        var findCarInfoButton = new Button("Nr rej. / VIN");
+        var promptLabel = new Label("Znajdź auto po tablicy lub VINie");
         var inputField = new TextField();
         var confirmationButton = new Button("OK");
         var feedbackLabel = new Label();
-        var layout = new VBox(10, promptLabel, inputField, confirmationButton, feedbackLabel);
+        var topButtons = new HBox(10, dailyInvoicesButton, commentsButton, findCarInfoButton);
+        var layout = new VBox(10, topButtons, promptLabel, inputField, confirmationButton, feedbackLabel);
 
         var scene = new Scene(layout, 800, 300);
         stage.setScene(scene);
@@ -39,6 +43,19 @@ public class App extends Application {
             Car car = new Car(row);
             cars.add(car);
         }
+
+        dailyInvoicesButton.setOnAction(e -> {
+            promptLabel.setText(" Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)");
+        });
+
+        commentsButton.setOnAction(e -> {
+            promptLabel.setText(" Wpisz datę, aby wyświetlić komentarze do aut z tego dnia (dd.mm.rrrr)");
+        });
+
+        findCarInfoButton.setOnAction(e -> {
+            promptLabel.setText("Wpisz nr rej. aby wyświetlić dane auta");
+        });
+
 
         confirmationButton.setOnAction(e -> {
             String inputString = inputField.getText();
