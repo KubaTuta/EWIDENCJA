@@ -74,7 +74,7 @@ public class App extends Application {
                     feedbackLabel.setText("2");
                     break;
                 case 3:
-                    feedbackLabel.setText("3");
+                    feedbackLabel.setText(CarMethods.showCarOfInterest(cars, inputString));
                     break;
 
 

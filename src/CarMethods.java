@@ -24,18 +24,17 @@ public class CarMethods {
         }
     }
 
-    public static void showCarOfInterest(List<Car> cars, String reg) {
+    public static String showCarOfInterest(List<Car> cars, String reg) {
+        String carOfInterest = "";
         boolean found = false;
         for (Car car : cars) {
             if (car.regNumber.equals(reg.toUpperCase().trim()) || car.vin.equals(reg.toUpperCase().trim())) {
-                System.out.println("szukasz pojazdu: " + car.regNumber);
                 found = true;
+                carOfInterest = car.allAttributeNames();
                 break;
             }
         }
-        if (!found) {
-            System.out.println("Nie ma takiego pojazdu");
-        }
+        return found ? carOfInterest : "Nie znaleziono takiego pojazdu";
     }
 
     public static String showDailyInvoiceNumbers(List<Car> cars, String date) {
