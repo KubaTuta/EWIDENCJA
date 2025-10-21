@@ -71,40 +71,14 @@ public class App extends Application {
                     feedbackLabel.setText(CarMethods.showDailyInvoiceNumbers(cars, inputString));
                     break;
                 case 2:
-                    feedbackLabel.setText("2");
+                    feedbackLabel.setText(CarMethods.showDailyComments(cars, inputString));
                     break;
                 case 3:
                     feedbackLabel.setText(CarMethods.showCarOfInterest(cars, inputString));
                     break;
-
-
+//                default:
+//                throw new IllegalStateException("Zły format odpowiedzi: " + promptNumber);
             }
-
         });
-//
-//        System.out.println("Co chcesz zrobić?");
-//        System.out.println("[1] Wyświetl numery faktur z danego dnia");
-//        System.out.println("[2] Wyświetl komentarze do aut z danego dnia");
-//        System.out.println("[3] Znajdź auto po tablicy lub VINie");
-//
-//        Scanner sc = new Scanner(System.in);
-//        int yourChoiceIs = sc.nextInt();
-//        sc.nextLine();
-//
-//        System.out.println("Wpisz datę w formacie DD.MM.RRRR");
-//        String input = sc.nextLine();
-//        switch (yourChoiceIs) {
-//            case 1:
-//                CarMethods.showDailyInvoiceNumbers(cars, input);
-//                break;
-//            case 2:
-//                CarMethods.showDailyComments(cars, input);
-//                break;
-//            case 3:
-//                CarMethods.showCarOfInterest(cars, input);
-//                break;
-//            default:
-//                throw new IllegalStateException("Zły format odpowiedzi: " + yourChoiceIs);
-//        }
     }
 }

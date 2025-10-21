@@ -2,26 +2,13 @@ import java.util.List;
 
 public class CarMethods {
 
-//    public static void showDailyInvoiceNumbers(List<Car> cars, String date) {
-//        System.out.println("Numery faktur z dnia " + date + ":");
-//        int counter = 0;
-//        for (Car car : cars) {
-//            if (car.dateOfInvoiceIssue.equals(date)) {
-//                System.out.print(car.invoiceNumber + ",");
-//                counter++;
-//                if (counter % 10 == 0) {
-//                    System.out.println();
-//                }
-//            } else continue;
-//        }
-//    }
-
-    public static void showDailyComments(List<Car> cars, String date) {
+    public static String showDailyComments(List<Car> cars, String date) {
+        StringBuilder sb = new StringBuilder();
         for (Car car : cars) {
             if (car.dateOfInvoiceIssue.equals(date) && !car.comment.isEmpty()) {
-                System.out.println(car.regNumber + ": " + car.comment);
+                sb.append(car.regNumber + ": " + car.comment).append("\n");
             }
-        }
+        } return sb.toString();
     }
 
     public static String showCarOfInterest(List<Car> cars, String reg) {
@@ -49,7 +36,4 @@ public class CarMethods {
         }
         return sb.toString();
     }
-
 }
-
-
