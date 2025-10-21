@@ -1,84 +1,86 @@
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
 public class App extends Application {
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
-    int promptNumber;
+    private final StringProperty promptLabelText = new SimpleStringProperty("");
 
     @Override
     public void start(Stage stage) throws Exception {
-        var dailyInvoicesButton = new Button("Faktury danego dnia");
-        var commentsButton = new Button("Komentarze");
-        var findCarInfoButton = new Button("Nr rej. / VIN");
-        var promptLabel = new Label("Znajdź auto po tablicy lub VINie");
-        var inputField = new TextField();
-        var confirmationButton = new Button("OK");
-        var feedbackLabel = new Label();
-
-        var topButtons = new HBox(10, dailyInvoicesButton, commentsButton, findCarInfoButton);
-        var layout = new VBox(10, topButtons, promptLabel, inputField, confirmationButton, feedbackLabel);
-
-        var scene = new Scene(layout, 800, 300);
+        Scene scene = new Scene(createContents(), 800, 600);
         stage.setScene(scene);
-        stage.setTitle("Ewidencja Remarketing");
+        stage.setTitle("EWIDENCJA Remarketing");
         stage.show();
+    }
 
+    private Region createContents() {
 
-        Path path = Paths.get(FILE_PATH);
-        List<String[]> rows = CsvReader.readCsvFile(path);
-        List<Car> cars = new ArrayList<>();
+        VBox wholeView = new VBox(createTopButtons(), createPromptLabel(), createInputField(), createConfirmationButton(), createFeedbackLabel());
 
-        for (String[] row : rows) {
-            Car car = new Car(row);
-            cars.add(car);
-        }
+//        dailyInvoicesButton.setOnAction(e -> {
+//            promptLabel.setText(" Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)");
+//            promptNumber = 1;
+//            inputField.clear();
+//        });
 
+        return wholeView;
+    }
+
+    private Node createTopButtons() {
+        HBox topButtons = new HBox(createDailyInvoicesButton(), createCommentsButton(), createJustButton("Nr rej. / VIN"));
+        topButtons.setSpacing(10);
+        topButtons.setPadding(new Insets(10));
+        topButtons.setAlignment(Pos.BASELINE_CENTER);
+        return topButtons;
+    }
+
+    private Node createDailyInvoicesButton() {
+        Button dailyInvoicesButton = new Button("Faktury danego dnia");
         dailyInvoicesButton.setOnAction(e -> {
-            promptLabel.setText(" Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)");
-            promptNumber = 1;
-            inputField.clear();
+            promptLabelText.set(" Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)");
         });
+        return dailyInvoicesButton;
+    }
 
-        commentsButton.setOnAction(e -> {
-            promptLabel.setText(" Wpisz datę, aby wyświetlić komentarze do aut z tego dnia (dd.mm.rrrr)");
-            promptNumber = 2;
-            inputField.clear();
-        });
+    private Node createCommentsButton() {
+        Button dailyInvoiceButton = new Button("Komentarze");
+        return dailyInvoiceButton;
+    }
 
-        findCarInfoButton.setOnAction(e -> {
-            promptLabel.setText("Wpisz nr rej. aby wyświetlić dane auta");
-            promptNumber = 3;
-            inputField.clear();
-        });
+    private Node createJustButton(String param) {
+        return new Button(param);
+    }
 
-        confirmationButton.setOnAction(e -> {
-            String inputString = inputField.getText();
-            switch (promptNumber) {
-                case 1:
+    private Node createPromptLabel() {
+        Label promptLabel = new Label("");
+        promptLabel.textProperty().bind(promptLabelText);
+        return promptLabel;
+    }
 
-                    feedbackLabel.setText(CarMethods.showDailyInvoiceNumbers(cars, inputString));
-                    break;
-                case 2:
-                    feedbackLabel.setText(CarMethods.showDailyComments(cars, inputString));
-                    break;
-                case 3:
-                    feedbackLabel.setText(CarMethods.showCarOfInterest(cars, inputString));
-                    break;
-//                default:
-//                throw new IllegalStateException("Zły format odpowiedzi: " + promptNumber);
-            }
-        });
+    private Node createInputField() {
+        TextField inputFieldLabel = new TextField("");
+        return inputFieldLabel;
+    }
+
+    private Node createConfirmationButton() {
+        Button confirmationButton = new Button("OK");
+        return confirmationButton;
+    }
+
+    private Node createFeedbackLabel() {
+        Label feedbackLabel = new Label("");
+        return feedbackLabel;
     }
 }
