@@ -40,37 +40,21 @@ public class App extends Application {
     }
 
     private Node createTopButtons() {
-        HBox topButtons = new HBox(createDailyInvoicesButton(),
-                createCommentsButton(),
-                createSingleCarButton());
+        HBox topButtons = new HBox(createTopButton("Nr rej. / VIN", "Wpisz nr rej. lub VIN, aby wyświetlić parametry pojazdu"),
+                createTopButton("Komentarze", "Wpisz datę, aby wyświetlić pojazdy z komentarzami z tego dnia (dd.mm.rrrr)"),
+                createTopButton("Faktury danego dnia", "Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)"));
         topButtons.setSpacing(10);
         topButtons.setPadding(new Insets(10));
         topButtons.setAlignment(Pos.BASELINE_CENTER);
         return topButtons;
     }
 
-    private Node createDailyInvoicesButton() {
-        Button dailyInvoicesButton = new Button("Faktury danego dnia");
-        dailyInvoicesButton.setOnAction(e -> {
-            promptLabelText.set(" Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)");
+    private Node createTopButton(String title, String labelSetter) {
+        Button button = new Button(title);
+        button.setOnAction(e -> {
+            promptLabelText.set(labelSetter);
         });
-        return dailyInvoicesButton;
-    }
-
-    private Node createCommentsButton() {
-        Button commentButton = new Button("Komentarze");
-        commentButton.setOnAction(e -> {
-            promptLabelText.set("Wpisz datę, aby wyświetlić pojazdy z komentarzami z tego dnia (dd.mm.rrrr");
-        });
-        return commentButton;
-    }
-
-    private Node createSingleCarButton() {
-        Button justButton = new Button("Nr rej. / VIN");
-        justButton.setOnAction(e -> {
-            promptLabelText.set("Wpisz nr rej. lub VIN, aby wyświetlić parametry pojazdu");
-        });
-        return justButton;
+        return button;
     }
 
     private Node createPromptLabel() {
