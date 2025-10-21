@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
     private final StringProperty promptLabelText = new SimpleStringProperty("");
+    private final StringProperty inputData = new SimpleStringProperty("");
     private final StringProperty outputText = new SimpleStringProperty("");
 
     @Override
@@ -65,6 +66,7 @@ public class App extends Application {
 
     private Node createInputField() {
         TextField inputFieldLabel = new TextField("");
+        inputFieldLabel.textProperty().bindBidirectional(inputData);
         return inputFieldLabel;
     }
 
