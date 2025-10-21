@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
     private final StringProperty promptLabelText = new SimpleStringProperty("");
+    private final StringProperty outputText = new SimpleStringProperty("");
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -39,7 +40,9 @@ public class App extends Application {
     }
 
     private Node createTopButtons() {
-        HBox topButtons = new HBox(createDailyInvoicesButton(), createCommentsButton(), createJustButton("Nr rej. / VIN"));
+        HBox topButtons = new HBox(createDailyInvoicesButton(),
+                createCommentsButton(),
+                createSingleCarButton());
         topButtons.setSpacing(10);
         topButtons.setPadding(new Insets(10));
         topButtons.setAlignment(Pos.BASELINE_CENTER);
@@ -55,12 +58,19 @@ public class App extends Application {
     }
 
     private Node createCommentsButton() {
-        Button dailyInvoiceButton = new Button("Komentarze");
-        return dailyInvoiceButton;
+        Button commentButton = new Button("Komentarze");
+        commentButton.setOnAction(e -> {
+            promptLabelText.set("Wpisz datę, aby wyświetlić pojazdy z komentarzami z tego dnia (dd.mm.rrrr");
+        });
+        return commentButton;
     }
 
-    private Node createJustButton(String param) {
-        return new Button(param);
+    private Node createSingleCarButton() {
+        Button justButton = new Button("Nr rej. / VIN");
+        justButton.setOnAction(e -> {
+            promptLabelText.set("Wpisz nr rej. lub VIN, aby wyświetlić parametry pojazdu");
+        });
+        return justButton;
     }
 
     private Node createPromptLabel() {
