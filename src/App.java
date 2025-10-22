@@ -31,11 +31,9 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("EWIDENCJA Remarketing");
         stage.show();
-        initializeInsetData();
     }
 
     public List<Car> initializeInsetData() throws IOException {
-
         Path path = Paths.get(FILE_PATH);
         List<String[]> rows = CsvReader.readCsvFile(path);
         List<Car> cars = new ArrayList<>();
@@ -49,6 +47,7 @@ public class App extends Application {
 
     private Region createContents() throws IOException {
         VBox wholeView = new VBox(createTopButtons(), createPromptLabel(), createInputField(), createConfirmationButton(), createFeedbackLabel());
+        wholeView.getStylesheets().add(this.getClass().getResource("/styled.css").toExternalForm());
         return wholeView;
     }
 
@@ -87,7 +86,7 @@ public class App extends Application {
         return confirmationButton;
     }
 
-    private Node createFeedbackLabel() {
+    private Node createFeedbackLabel() throws IOException {
         Label feedbackLabel = new Label("");
         return feedbackLabel;
     }
