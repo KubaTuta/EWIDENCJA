@@ -63,6 +63,7 @@ public class App extends Application {
 
     private Node createTopUniversalButton(String title, String labelSetter) {
         Button button = new Button(title);
+        button.getStyleClass().add("top-button");
         button.setOnAction(e -> {
             promptLabelText.set(labelSetter);
         });
@@ -71,6 +72,7 @@ public class App extends Application {
 
     private Node createPromptLabel() {
         Label promptLabel = new Label("");
+        promptLabel.getStyleClass().add("prompt-label");
         promptLabel.textProperty().bind(promptLabelText);
         return promptLabel;
     }

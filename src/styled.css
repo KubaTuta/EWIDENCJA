@@ -1,3 +1,22 @@
 .root {
     -fx-background-color: rgb(0, 150, 94);
+    -fx-font-family: "Genos, sans-serif";
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
     }
+@font-face {
+     font-family: "Genos, sans-serif";
+     src: url("/Genos-Regular.ttf");
+   }
+.top-button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-family: "Genos", sans-serif;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    }
+.prompt-label {
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-family: "Genos", sans-serif;
+}
