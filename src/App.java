@@ -13,6 +13,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 public class App extends Application {
     private static final String FILE_PATH = "C:/JAVA/EWIDENCJA/src/csv.csv";
     private final StringProperty promptLabelText = new SimpleStringProperty("");
@@ -25,32 +31,38 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("EWIDENCJA Remarketing");
         stage.show();
+        initializeInsetData();
     }
 
-    private Region createContents() {
+    public List<Car> initializeInsetData() throws IOException {
 
+        Path path = Paths.get(FILE_PATH);
+        List<String[]> rows = CsvReader.readCsvFile(path);
+        List<Car> cars = new ArrayList<>();
+
+        for (String[] row : rows) {
+            Car car = new Car(row);
+            cars.add(car);
+        }
+        return cars;
+    }
+
+    private Region createContents() throws IOException {
         VBox wholeView = new VBox(createTopButtons(), createPromptLabel(), createInputField(), createConfirmationButton(), createFeedbackLabel());
-
-//        dailyInvoicesButton.setOnAction(e -> {
-//            promptLabel.setText(" Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)");
-//            promptNumber = 1;
-//            inputField.clear();
-//        });
-
         return wholeView;
     }
 
     private Node createTopButtons() {
-        HBox topButtons = new HBox(createTopButton("Nr rej. / VIN", "Wpisz nr rej. lub VIN, aby wyświetlić parametry pojazdu"),
-                createTopButton("Komentarze", "Wpisz datę, aby wyświetlić pojazdy z komentarzami z tego dnia (dd.mm.rrrr)"),
-                createTopButton("Faktury danego dnia", "Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)"));
+        HBox topButtons = new HBox(createTopUniversalButton("Nr rej. / VIN", "Wpisz nr rej. lub VIN, aby wyświetlić parametry pojazdu"),
+                createTopUniversalButton("Komentarze", "Wpisz datę, aby wyświetlić pojazdy z komentarzami z tego dnia (dd.mm.rrrr)"),
+                createTopUniversalButton("Faktury danego dnia", "Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)"));
         topButtons.setSpacing(10);
         topButtons.setPadding(new Insets(10));
         topButtons.setAlignment(Pos.BASELINE_CENTER);
         return topButtons;
     }
 
-    private Node createTopButton(String title, String labelSetter) {
+    private Node createTopUniversalButton(String title, String labelSetter) {
         Button button = new Button(title);
         button.setOnAction(e -> {
             promptLabelText.set(labelSetter);
