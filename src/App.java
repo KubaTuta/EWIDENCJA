@@ -25,6 +25,7 @@ public class App extends Application {
     private final StringProperty promptLabelText = new SimpleStringProperty("");
     private final StringProperty inputData = new SimpleStringProperty("");
     private final StringProperty outputText = new SimpleStringProperty("");
+    private String activeButtonType = "";
     List<Car> cars = initializeInsetData();
 
     public App() throws IOException {
@@ -71,6 +72,7 @@ public class App extends Application {
         button.getStyleClass().add("top-button");
         button.setOnAction(e -> {
             promptLabelText.set(labelSetter);
+            activeButtonType = title;
         });
         return button;
     }
