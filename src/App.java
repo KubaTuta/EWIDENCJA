@@ -97,6 +97,7 @@ public class App extends Application {
 
     private Node createFeedbackLabel() throws IOException {
         TextArea feedbackLabel = new TextArea("");
+        feedbackLabel.textProperty().bind(outputText);
         feedbackLabel.setEditable(false);
         feedbackLabel.setWrapText(true);
         feedbackLabel.setPadding(new Insets(10));
