@@ -97,6 +97,19 @@ public class App extends Application {
         return wrapper;
     }
 
+    private String switchBetweenMethods(List<Car> cars, String input) {
+        switch (activeButtonType) {
+            case "Nr rej. / VIN":
+                return CarMethods.showCarOfInterest(cars, input);
+            case "Komentarze":
+                return CarMethods.showDailyComments(cars, input);
+            case "Faktury danego dnia":
+                return CarMethods.showDailyInvoiceNumbers(cars, input);
+            default:
+                return "nic";
+        }
+    }
+
     private Node createFeedbackLabel() throws IOException {
         TextArea feedbackLabel = new TextArea("");
         feedbackLabel.textProperty().bind(outputText);
