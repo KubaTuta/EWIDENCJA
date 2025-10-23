@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -85,11 +86,17 @@ public class App extends Application {
 
     private Node createConfirmationButton() {
         Button confirmationButton = new Button("OK");
-        return confirmationButton;
+        HBox wrapper = new HBox(confirmationButton);
+        wrapper.setAlignment(Pos.CENTER);
+        return wrapper;
     }
 
     private Node createFeedbackLabel() throws IOException {
-        Label feedbackLabel = new Label("");
+        TextArea feedbackLabel = new TextArea("");
+        feedbackLabel.setEditable(false);
+        feedbackLabel.setWrapText(true);
+        feedbackLabel.setPadding(new Insets(10));
+        feedbackLabel.getStyleClass().add("feedback-label");
         return feedbackLabel;
     }
 }
