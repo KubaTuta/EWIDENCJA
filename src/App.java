@@ -25,6 +25,10 @@ public class App extends Application {
     private final StringProperty promptLabelText = new SimpleStringProperty("");
     private final StringProperty inputData = new SimpleStringProperty("");
     private final StringProperty outputText = new SimpleStringProperty("");
+    List<Car> cars = initializeInsetData();
+
+    public App() throws IOException {
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
