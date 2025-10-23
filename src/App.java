@@ -92,6 +92,10 @@ public class App extends Application {
 
     private Node createConfirmationButton() {
         Button confirmationButton = new Button("OK");
+        confirmationButton.setOnAction(e -> {
+            String input = switchBetweenMethods(cars, inputData.get());
+            outputText.set(input);
+        });
         HBox wrapper = new HBox(confirmationButton);
         wrapper.setAlignment(Pos.CENTER);
         return wrapper;
