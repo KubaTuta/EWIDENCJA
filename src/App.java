@@ -54,7 +54,7 @@ public class App extends Application {
     }
 
     private Region createContents() throws IOException {
-        VBox wholeView = new VBox(createTopButtons(), createPromptLabel(), createInputField(), createConfirmationButton(), createFeedbackLabel());
+        VBox wholeView = new VBox(createTopButtons(), createPromptLabel(), createInputHorizontalArea(), createFeedbackLabel());
         wholeView.getStylesheets().add(this.getClass().getResource("/styled.css").toExternalForm());
         return wholeView;
     }
