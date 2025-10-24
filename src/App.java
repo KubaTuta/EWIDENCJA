@@ -131,6 +131,8 @@ public class App extends Application {
         feedbackLabel.setWrapText(true);
         feedbackLabel.setPadding(new Insets(10));
         feedbackLabel.getStyleClass().add("feedback-label");
+        VBox.setVgrow(feedbackLabel, Priority.ALWAYS);
+
         return feedbackLabel;
     }
 }
