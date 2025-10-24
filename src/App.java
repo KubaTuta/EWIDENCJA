@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -76,6 +77,13 @@ public class App extends Application {
             activeButtonType = title;
         });
         return button;
+    }
+
+    private Node createInputHorizontalArea() {
+        HBox hBox = new HBox(createInputField(), createConfirmationButton());
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setSpacing(10);
+        return hBox;
     }
 
     private Node createPromptLabel() {
