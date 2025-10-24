@@ -8,7 +8,8 @@ public class CarMethods {
             if (car.dateOfInvoiceIssue.equals(date) && !car.comment.isEmpty()) {
                 sb.append(car.regNumber + ": " + car.comment).append("\n");
             }
-        } return sb.toString();
+        }
+        return sb.toString();
     }
 
     public static String showCarOfInterest(List<Car> cars, String reg) {
@@ -26,12 +27,9 @@ public class CarMethods {
 
     public static String showDailyInvoiceNumbers(List<Car> cars, String date) {
         StringBuilder sb = new StringBuilder("Numery faktur z dnia " + date + ":\n");
-        int counter = 0;
         for (Car car : cars) {
             if (car.dateOfInvoiceIssue.equals(date)) {
                 sb.append(car.invoiceNumber).append(",");
-                counter++;
-                if (counter % 10 == 0) sb.append("\n");
             }
         }
         return sb.toString();
