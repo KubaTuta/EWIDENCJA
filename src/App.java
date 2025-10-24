@@ -33,8 +33,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(createContents(), 800, 600);
+        Scene scene = new Scene(createContents());
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.setTitle("EWIDENCJA Remarketing");
         stage.show();
     }
