@@ -101,6 +101,7 @@ public class App extends Application {
 
     private Node createConfirmationButton() {
         Button confirmationButton = new Button("OK");
+        confirmationButton.getStyleClass().add("confirmation-button");
         confirmationButton.setOnAction(e -> {
             String input = switchBetweenMethods(cars, inputData.get());
             outputText.set(input);
