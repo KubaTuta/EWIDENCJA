@@ -7,12 +7,13 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -115,8 +116,6 @@ public class App extends Application {
             String input = switchBetweenMethods(cars, inputData.get());
             outputText.set(input);
         });
-        HBox wrapper = new HBox(confirmationButton);
-        wrapper.setAlignment(Pos.CENTER);
         return wrapper;
     }
 
@@ -133,15 +132,19 @@ public class App extends Application {
         }
     }
 
-    private Node createFeedbackLabel() throws IOException {
-        TextArea feedbackLabel = new TextArea("");
-        feedbackLabel.textProperty().bind(outputText);
-        feedbackLabel.setEditable(false);
-        feedbackLabel.setWrapText(true);
-        feedbackLabel.setPadding(new Insets(10));
-        feedbackLabel.getStyleClass().add("feedback-label");
-        VBox.setVgrow(feedbackLabel, Priority.ALWAYS);
+    private Node createFeedbackLabel() {
+        TextFlow feedbackTextFlow = new TextFlow();
+        feedbackTextFlow.setPadding(new Insets(10));
+        feedbackTextFlow.getStyleClass().add("feedback-label");
+        VBox.setVgrow(feedbackTextFlow, Priority.ALWAYS);
 
-        return feedbackLabel;
+        outputText.addListener((obs, oldText, newText) -> {
+            feedbackTextFlow.getChildren().clear();
+
+            Text textNode = new Text(newText);
+            feedbackTextFlow.getChildren().add(textNode);
+        });
+
+        return feedbackTextFlow;
     }
 }
