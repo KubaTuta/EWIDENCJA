@@ -26,6 +26,12 @@ public class App extends Application {
     private final StringProperty promptLabelText = new SimpleStringProperty("");
     private final StringProperty inputData = new SimpleStringProperty("");
     private final StringProperty outputText = new SimpleStringProperty("");
+    private final String reg = "Nr rej. / VIN";
+    private final String regContent = "Wpisz nr rej. lub VIN, aby wyświetlić parametry pojazdu";
+    private final String comments = "Komentarze";
+    private final String commentsContent = "Wpisz datę, aby wyświetlić pojazdy z komentarzami z tego dnia (dd.mm.rrrr)";
+    private final String invoiceNumbers = "Faktury danego dnia";
+    private final String invoiceNumbersContent = "Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)";
     private String activeButtonType = "";
     List<Car> cars = initializeInsetData();
 
@@ -60,9 +66,9 @@ public class App extends Application {
     }
 
     private Node createTopButtons() {
-        HBox topButtons = new HBox(createTopUniversalButton("Nr rej. / VIN", "Wpisz nr rej. lub VIN, aby wyświetlić parametry pojazdu"),
-                createTopUniversalButton("Komentarze", "Wpisz datę, aby wyświetlić pojazdy z komentarzami z tego dnia (dd.mm.rrrr)"),
-                createTopUniversalButton("Faktury danego dnia", "Wpisz datę, aby wyświetlić listę faktur z tego dnia (dd.mm.rrrr)"));
+        HBox topButtons = new HBox(createTopUniversalButton(reg, regContent),
+                createTopUniversalButton(comments, commentsContent),
+                createTopUniversalButton(invoiceNumbers, invoiceNumbersContent));
         topButtons.setSpacing(10);
         topButtons.setPadding(new Insets(10));
         topButtons.setAlignment(Pos.BASELINE_CENTER);
@@ -102,6 +108,9 @@ public class App extends Application {
     private Node createConfirmationButton() {
         Button confirmationButton = new Button("OK");
         confirmationButton.getStyleClass().add("confirmation-button");
+        HBox wrapper = new HBox(confirmationButton);
+        wrapper.setAlignment(Pos.CENTER);
+
         confirmationButton.setOnAction(e -> {
             String input = switchBetweenMethods(cars, inputData.get());
             outputText.set(input);
@@ -113,11 +122,11 @@ public class App extends Application {
 
     private String switchBetweenMethods(List<Car> cars, String input) {
         switch (activeButtonType) {
-            case "Nr rej. / VIN":
+            case reg:
                 return CarMethods.showCarOfInterest(cars, input);
-            case "Komentarze":
+            case comments:
                 return CarMethods.showDailyComments(cars, input);
-            case "Faktury danego dnia":
+            case invoiceNumbers:
                 return CarMethods.showDailyInvoiceNumbers(cars, input);
             default:
                 return "nic";
